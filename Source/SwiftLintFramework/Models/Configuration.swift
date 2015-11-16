@@ -132,6 +132,7 @@ public struct Configuration {
             ForceTryRule(),
             LeadingWhitespaceRule(),
             LegacyConstructorRule(),
+            MissingDocsRule(),
             NestingRule(),
             OpeningBraceRule(),
             OperatorFunctionWhitespaceRule(),
