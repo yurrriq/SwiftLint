@@ -101,4 +101,8 @@ class StringRuleTests: XCTestCase {
     func testLegacyConstructor() {
         verifyRule(LegacyConstructorRule.description)
     }
+
+    func testEmptyCount() {
+        verifyRule(EmptyCountRule.description)
+    }
 }

@@ -16,6 +16,9 @@
   [Marcelo Fabri](https://github.com/marcelofabri)
   [#161](https://github.com/realm/SwiftLint/issues/161)
 
+* Add rule to encourage checking `isEmpty` over comparing `count` to zero.  
+  [JP Simard](https://github.com/jpsim)
+
 ##### Bug Fixes
 
 * Statement position rule no longer triggers for non-keyword uses of `catch` and
