@@ -13,6 +13,9 @@ import SwiftXPC
 private var structureCache = Cache(Structure.init)
 private var syntaxMapCache = Cache(SyntaxMap.init)
 
+private var _allDeclarationsByType = [String: [String]]()
+private var declarationMapNeedsRebuilding = true
+
 private struct Cache<T> {
 
     private var values = [String: T]()
@@ -30,7 +33,7 @@ private struct Cache<T> {
         let value = factory(file)
         values[key] = value
         if value is Structure {
-            rebuildAllDeclarationsByType()
+            declarationMapNeedsRebuilding = true
         }
         return value
     }
@@ -51,12 +54,18 @@ public extension File {
     }
 
     public static func clearCaches() {
-        allDeclarationsByType = [:]
+        declarationMapNeedsRebuilding = true
+        _allDeclarationsByType = [:]
         structureCache.clear()
         syntaxMapCache.clear()
     }
 
-    public private(set) static var allDeclarationsByType: [String: [String]] = [:]
+    public static var allDeclarationsByType: [String: [String]] {
+        if declarationMapNeedsRebuilding {
+            rebuildAllDeclarationsByType()
+        }
+        return _allDeclarationsByType
+    }
 }
 
 private func dictFromKeyValuePairs<Key: Hashable, Value>(pairs: [(Key, Value)]) -> [Key: Value] {
@@ -87,5 +96,6 @@ private func rebuildAllDeclarationsByType() {
         }
         return (name, substructure.flatMap({ $0["key.name"] as? String }))
     }
-    File.allDeclarationsByType = dictFromKeyValuePairs(allDeclarationsByType)
+    _allDeclarationsByType = dictFromKeyValuePairs(allDeclarationsByType)
+    declarationMapNeedsRebuilding = false
 }
