@@ -15,6 +15,7 @@ let allRuleIdentifiers = Configuration.rulesFromYAML().map {
 }
 
 func violations(string: String, config: Configuration = Configuration()) -> [StyleViolation] {
+    File.clearCaches()
     return Linter(file: File(contents: string), configuration: config).styleViolations
 }
 
