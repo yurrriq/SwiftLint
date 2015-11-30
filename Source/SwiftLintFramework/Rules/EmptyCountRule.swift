@@ -14,6 +14,7 @@ public struct EmptyCountRule: Rule {
         name: "Empty Count",
         description: "Prefer checking `isEmpty` over comparing `count` to zero.",
         nonTriggeringExamples: [
+            "var count = 0\n",
             "[Int]().isEmpty\n",
             "[Int]().count > 1\n",
             "[Int]().count == 1\n"
@@ -26,7 +27,7 @@ public struct EmptyCountRule: Rule {
     )
 
     public func validateFile(file: File) -> [StyleViolation] {
-        let pattern = "count\\s*[!<=>]+\\s*0"
+        let pattern = "count\\s*(==|!=|<|<=|>|>=)\\s*0"
         let excludingKinds = SyntaxKind.commentAndStringKinds()
         return file.matchPattern(pattern, excludingSyntaxKinds: excludingKinds).map {
             StyleViolation(ruleDescription: self.dynamicType.description,
