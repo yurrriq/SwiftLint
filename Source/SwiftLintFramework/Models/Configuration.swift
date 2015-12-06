@@ -152,9 +152,8 @@ public struct Configuration {
             (yaml?[.String($0.description.identifier)].arrayOfInts).map(ruleParametersFromArray)
         }
         let aclParams = { (ruleType: Rule.Type) -> [RuleParameter<AccessControlLevel>]? in
-            let acl = (yaml?[.String(ruleType.description.identifier)].arrayOfStrings)?
-                .flatMap({ AccessControlLevel(rawValue: $0) })
-            return acl.map(ruleParametersFromArray)
+            return ((yaml?[.String(ruleType.description.identifier)].arrayOfStrings)?
+                .flatMap({ AccessControlLevel(rawValue: $0) })).map(ruleParametersFromArray)
         }
         // swiftlint:disable line_length
         return [
