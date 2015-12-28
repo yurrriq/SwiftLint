@@ -12,15 +12,6 @@ import Yaml
 
 private let fileManager = NSFileManager.defaultManager()
 
-extension Yaml {
-    var arrayOfStrings: [Swift.String]? {
-        return array?.flatMap { $0.string } ?? string.map { [$0] }
-    }
-    var arrayOfInts: [Swift.Int]? {
-        return array?.flatMap { $0.int } ?? int.map { [$0] }
-    }
-}
-
 public struct Configuration {
     public let disabledRules: [String] // disabled_rules
     public let included: [String]      // included
