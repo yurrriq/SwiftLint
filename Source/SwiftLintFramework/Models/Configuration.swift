@@ -115,7 +115,7 @@ public struct Configuration: Equatable {
             configPath = fullPath
             return
         } catch {
-            // TODO: Should print a warning here if YAML fails
+            queuedPrintError("Failed to load configuration from '\(path)'")
             failIfRequired()
         }
         self.init()!
