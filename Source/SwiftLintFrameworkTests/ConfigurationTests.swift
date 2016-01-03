@@ -7,21 +7,6 @@
 //
 
 import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
-import SwiftLintFramework
 import SourceKittenFramework
 import XCTest
 
