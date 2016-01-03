@@ -14,11 +14,8 @@ internal func regex(pattern: String) -> NSRegularExpression {
     // all patterns used for regular expressions in SwiftLint are string literals which have been
     // confirmed to work, so it's ok to force-try here.
 
-    // TODO: Switch to new comment syntax
-    // swiftlint:disable force_try
     // swiftlint:disable:next force_try
     return try! NSRegularExpression(pattern: pattern, options: [.AnchorsMatchLines])
-    // swiftlint:enable force_try
 }
 
 extension File {
