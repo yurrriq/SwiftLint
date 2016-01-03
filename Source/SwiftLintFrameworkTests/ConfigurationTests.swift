@@ -6,7 +6,22 @@
 //  Copyright © 2015 Realm. All rights reserved.
 //
 
-@testable import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
+import SwiftLintFramework
 import SourceKittenFramework
 import XCTest
 
@@ -160,6 +175,12 @@ class ConfigurationTests: XCTestCase {
 }
 
 // MARK: - ProjectMock Paths
+
+extension String {
+    func stringByAppendingPathComponent(pathComponent: String) -> String {
+        return (self as NSString).stringByAppendingPathComponent(pathComponent)
+    }
+}
 
 extension XCTestCase {
     var bundlePath: String {

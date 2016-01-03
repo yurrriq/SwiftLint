@@ -121,7 +121,7 @@ public struct Configuration: Equatable {
         self.init()!
     }
 
-    static func rulesFromDict(dict: [String: AnyObject]? = nil,
+    public static func rulesFromDict(dict: [String: AnyObject]? = nil,
                           ruleList: RuleList = masterRuleList) -> [Rule] {
         var rules = [Rule]()
         for rule in ruleList.list.values {
@@ -158,8 +158,8 @@ public struct Configuration: Equatable {
     }
 
     public func configForFile(file: File) -> Configuration {
-        if  useNestedConfigs,
-            let containingDir = file.path?.stringByDeletingLastPathComponent {
+        if useNestedConfigs,
+            let containingDir = (file.path as NSString?)?.stringByDeletingLastPathComponent {
             return configForPath(containingDir)
         }
         return self
@@ -170,6 +170,7 @@ public struct Configuration: Equatable {
 
 public extension Configuration {
     func configForPath(path: String) -> Configuration {
+        let path = path as NSString
         let configSearchPath = path.stringByAppendingPathComponent(".swiftlint.yml")
 
         // If a config exists and it isn't us, load and merge the configs
