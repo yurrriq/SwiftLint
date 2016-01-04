@@ -96,11 +96,9 @@ public struct Configuration: Equatable {
 
     public init(path: String = ".swiftlint.yml", optional: Bool = true, silent: Bool = false) {
         let fullPath = (path as NSString).absolutePathRepresentation()
-        let failIfRequired = {
-            if !optional { fatalError("Could not read configuration file at path '\(fullPath)'") }
-        }
+        let fail = { fatalError("Could not read configuration file at path '\(fullPath)'") }
         if path.isEmpty || !NSFileManager.defaultManager().fileExistsAtPath(fullPath) {
-            failIfRequired()
+            if !optional { fail() }
             self.init()!
             return
         }
@@ -115,8 +113,7 @@ public struct Configuration: Equatable {
             configPath = fullPath
             return
         } catch {
-            queuedPrintError("Failed to load configuration from '\(path)'")
-            failIfRequired()
+            fail()
         }
         self.init()!
     }

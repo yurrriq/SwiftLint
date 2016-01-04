@@ -14,9 +14,10 @@ struct RulesCommand: CommandType {
     let verb = "rules"
     let function = "Display the list of rules and their identifiers"
 
-    func run(mode: CommandMode) -> Result<(), CommandantError<()>> {
-        let ruleDescriptions = masterRuleList.list.keys
-        .joinWithSeparator("\n")
+    func run(options: NoOptions<CommandantError<()>>) -> Result<(), CommandantError<()>> {
+        let ruleDescriptions = masterRuleList.list.values.map {
+            $0.description.consoleDescription
+        }.joinWithSeparator("\n")
         print(ruleDescriptions)
         return .Success()
     }
